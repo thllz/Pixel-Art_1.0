@@ -1,5 +1,6 @@
 const selected = document.getElementsByClassName('selected');
 const pixelBoard = document.getElementById('pixel-board');
+
 // #1 Criando quadro de pixel
 function genPixel() {
   for (let l = 1; l <= 5; l += 1) {
@@ -12,101 +13,62 @@ function genPixel() {
     pixelBoard.appendChild(sLine);
   }
 }
-// const pixel = document.getElementsByTagName('pixel');
-// function setWhiteBackground() {
-//   pixel.classList.add = 'white';
+
+// function selectColor(cor) {
+//   for (let i = 0; i < selected.length; i += 1) {
+//     selected[i].classList.remove('selected');
+//   }
+//   cor.target.classList.add('selected');
 // }
 
-// Setando a classe selected no elemento de cor preto
+// Setando cor preta 
 
 function setColor1(color) {
   const color1 = document.querySelector('#color1');
   color1.classList.add('selected');
 }
 
+// Req 7 selecionando cor na palheta
+const c1 = document.getElementById('color1');
+const c2 = document.getElementById('color2');
+const c3 = document.getElementById('color3');
+const c4 = document.getElementById('color4');
+
+c1.addEventListener('click', colorSelected);
+c2.addEventListener('click', colorSelected);
+c3.addEventListener('click', colorSelected);
+c4.addEventListener('click', colorSelected);
+
+function colorSelected(event) {
+  const selectedColor = document.querySelector('.selected');
+  selectedColor.classList.remove('selected');
+  event.target.classList.add('selected');
+}
+
+// pintando pixel
+
+function paintPixel() {
+  const pixelBoard = document.querySelector('#pixel-board');
+  pixelBoard.addEventListener('click', function(event) {
+  let corSelected = document.querySelectorAll('.selected');
+  event.target.style.background = 'corSelected[0].id';
+})
+}
+
+paintPixel();
+
+//Req 9 limpar quadro
+const pixel = document.getElementsByClassName('pixel');
+btnLimpar = document.getElementById('clear-board');
+
+btnLimpar.addEventListener('click', clearBoard);
+function clearBoard() {
+  for (let i = 0; i < pixel.length; i += 1) {
+    pixel[i].style.backgroundColor = 'white';
+  }
+}
+
 window.onload = function load() {
   genPixel(5);
   setColor1();
-  // setWhiteColor
-  // selectColor();
 };
-
-// const color1 = document.querySelector('#color1');
-// color1.addEventListener('click', function selectColor() {
-// color1.classList.add('selected');
-// });
-
-// function selectColor1() {
-// const color1 = document.querySelector('#color1');
-// color1.classList.add('selected');
-// }
-
-// if (color1.addEventListener('click', selectColor1)) {
-// } else {
-//   color1.classList.remove('selected');
-// }
-
-// function selectColor2() {
-//   const color2 = document.querySelector('#color2');
-//   color2.classList.add('selected');
-// }
-
-// if (color2.addEventListener('click', selectColor2)) {
-// } else {
-//   color2.classList.remove('selected');
-// }
-
-// function selectColor3() {
-//   const color3 = document.querySelector('#color3');
-//   color3.classList.add('selected');
-// }
-
-// if (color3.addEventListener('click', selectColor3)) {
-// } else {
-//   color3.classList.remove('selected');
-// }
-
-// function selectColor4() {
-//   const color4 = document.querySelector('#color4');
-//   color4.classList.add('selected');
-// }
-
-// if (color4.addEventListener('click', selectColor4)) {
-// } else {
-//   color4.classList.remove('selected');
-// }
-
-//   if (color1.addEventListener('click')) {
-//     selectColor1();
-//   } else {
-//     color1.classList.remove('selected');
-//   }
-
-//   if (color2.addEventListener('click')) {
-//     color2.classList.add('selected');
-//   } else {
-//     color2.classList.remove('selected');
-//   }
-
-//   if (color3.addEventListener('click')) {
-//     color3.classList.add('selected');
-//   } else {
-//     color3.classList.remove('selected');
-//   }
-
-//   if (color4.addEventListener('click')) {
-//     color4.classList.add('selected');
-//   } else {
-//     color4.classList.remove('selected');
-//   }
-// }
-
-//     else if (color2.addEventListener('click')){
-//   color2.classList.add('selected');
-// } else if (color3.addEventListener('click')){
-//   color3.classList.add('selected');
-// } else if (color4.addEventListener('click')){
-//   color4.classList.add('selected');
-// } else {
-
-// }
