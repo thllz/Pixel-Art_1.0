@@ -17,7 +17,15 @@ function genPixel(value) {
     pixelBoard.appendChild(sLine);
   }
 }
+// Cores aleatórias
 
+function colorGenerator() {
+  const c2 = document.getElementById('color2');
+  const c3 = document.getElementById('color3');
+  const c4 = document.getElementById('color4');
+
+  c2.style.backgroundColor = Math.random('#');
+}
 // Setando primeiro elemento como selected
 
 function setColor1(color) {
