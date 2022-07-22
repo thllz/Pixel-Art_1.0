@@ -12,6 +12,7 @@ function genPixel(value) {
       const cLine = document.createElement('div');
       cLine.classList.add('pixel');
       sLine.appendChild(cLine);
+      cLine.style.backgroundColor = 'white';
     }
     pixelBoard.appendChild(sLine);
   }
