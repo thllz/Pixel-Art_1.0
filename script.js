@@ -1,11 +1,15 @@
 const selected = document.getElementsByClassName('selected');
 const pixelBoard = document.getElementById('pixel-board');
+const pixel = document.getElementsByClassName('pixel');
+const colorPalette = document.getElementsByClassName('color');
+
 
 // #1 Criando quadro de pixel
-function genPixel() {
-  for (let l = 1; l <= 5; l += 1) {
+
+function genPixel(value) {
+  for (let l = 1; l <= value; l += 1) {
     const sLine = document.createElement('div');
-    for (let c = 1; c <= 5; c += 1) {
+    for (let c = 1; c <= value; c += 1) {
       const cLine = document.createElement('div');
       cLine.classList.add('pixel');
       sLine.appendChild(cLine);
@@ -14,51 +18,41 @@ function genPixel() {
   }
 }
 
-// function selectColor(cor) {
-//   for (let i = 0; i < selected.length; i += 1) {
-//     selected[i].classList.remove('selected');
-//   }
-//   cor.target.classList.add('selected');
-// }
-
-// Setando cor preta 
+// Setando primeiro elemento como selected
 
 function setColor1(color) {
   const color1 = document.querySelector('#color1');
   color1.classList.add('selected');
 }
 
-// Req 7 selecionando cor na palheta
-const c1 = document.getElementById('color1');
-const c2 = document.getElementById('color2');
-const c3 = document.getElementById('color3');
-const c4 = document.getElementById('color4');
-
-c1.addEventListener('click', colorSelected);
-c2.addEventListener('click', colorSelected);
-c3.addEventListener('click', colorSelected);
-c4.addEventListener('click', colorSelected);
-
-function colorSelected(event) {
-  const selectedColor = document.querySelector('.selected');
-  selectedColor.classList.remove('selected');
-  event.target.classList.add('selected');
-}
-
-// pintando pixel
+// Pintando pixel
 
 function paintPixel() {
-  const pixelBoard = document.querySelector('#pixel-board');
-  pixelBoard.addEventListener('click', function(event) {
-  let corSelected = document.querySelectorAll('.selected');
-  event.target.style.background = 'corSelected[0].id';
-})
+  for (let i = 0; i < pixel.length; i += 1) {
+    pixel[i].addEventListener('click', (event) => {
+      let colorS = document.querySelector('.selected');
+      let bgColor = getComputedStyle(colorS, null).getPropertyValue(
+        'background-color'
+      );
+      event.target.style.backgroundColor = bgColor;
+    });
+  }
 }
 
-paintPixel();
+// Selecionando paleta
+
+function colorSel() {
+  for (let i = 0; i < colorPalette.length; i += 1) {
+    colorPalette[i].addEventListener('click', (event) => {
+      const selectedColor = document.querySelector('.selected');
+      selectedColor.classList.remove('selected');
+      event.target.classList.add('selected');
+    });
+  }
+}
 
 //Req 9 limpar quadro
-const pixel = document.getElementsByClassName('pixel');
+
 btnLimpar = document.getElementById('clear-board');
 
 btnLimpar.addEventListener('click', clearBoard);
@@ -68,7 +62,38 @@ function clearBoard() {
   }
 }
 
+//Req 10 gerar pixels
+
+const inputGenBoard = document.getElementById('board-size');
+const btnGenBoard = document.getElementById('generate-board');
+btnGenBoard.addEventListener('click', () => {
+  let valueBoard = inputGenBoard.value;
+  // realValue = valueBoard % 5
+  if (valueBoard.length === 0) {
+    alert('Board inválido!');
+  } else pixelBoard.replaceChildren();
+  genPixel(valueBoard);
+});
+
 window.onload = function load() {
   genPixel(5);
   setColor1();
+  colorSel();
 };
+
+// Req 7 selecionando cor na palheta
+// const c1 = document.getElementById('color1');
+// const c2 = document.getElementById('color2');
+// const c3 = document.getElementById('color3');
+// const c4 = document.getElementById('color4');
+
+// function colorSelected(event) {
+//   const selectedColor = document.querySelector('.selected');
+//   selectedColor.classList.remove('selected');
+//   event.target.classList.add('selected');
+// }
+
+// c1.addEventListener('click', colorSelected);
+// c2.addEventListener('click', colorSelected);
+// c3.addEventListener('click', colorSelected);
+// c4.addEventListener('click', colorSelected);
