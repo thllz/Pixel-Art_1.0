@@ -3,7 +3,6 @@ const pixelBoard = document.getElementById('pixel-board');
 const pixel = document.getElementsByClassName('pixel');
 const colorPalette = document.getElementsByClassName('color');
 
-
 // #1 Criando quadro de pixel
 
 function genPixel(value) {
@@ -30,9 +29,9 @@ function setColor1(color) {
 function paintPixel() {
   for (let i = 0; i < pixel.length; i += 1) {
     pixel[i].addEventListener('click', (event) => {
-      let colorS = document.querySelector('.selected');
-      let bgColor = getComputedStyle(colorS, null).getPropertyValue(
-        'background-color'
+      const colorS = document.querySelector('.selected');
+      const bgColor = getComputedStyle(colorS, null).getPropertyValue(
+        'background-color',
       );
       event.target.style.backgroundColor = bgColor;
     });
@@ -51,7 +50,7 @@ function colorSel() {
   }
 }
 
-//Req 9 limpar quadro
+// Req 9 limpar quadro
 
 btnLimpar = document.getElementById('clear-board');
 
@@ -62,12 +61,12 @@ function clearBoard() {
   }
 }
 
-//Req 10 gerar pixels
+// Req 10 gerar pixels
 
 const inputGenBoard = document.getElementById('board-size');
 const btnGenBoard = document.getElementById('generate-board');
 btnGenBoard.addEventListener('click', () => {
-  let valueBoard = inputGenBoard.value;
+  const valueBoard = inputGenBoard.value;
   // realValue = valueBoard % 5
   if (valueBoard.length === 0) {
     alert('Board inválido!');
@@ -79,6 +78,7 @@ window.onload = function load() {
   genPixel(5);
   setColor1();
   colorSel();
+  paintPixel();
 };
 
 // Req 7 selecionando cor na palheta
