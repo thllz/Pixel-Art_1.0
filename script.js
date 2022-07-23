@@ -20,11 +20,27 @@ function genPixel(value) {
 // Cores aleatórias
 
 function colorGenerator() {
+  const red2 = Math.round(Math.random() * 255);
+  const green2 = Math.round(Math.random() * 255);
+  const blue2 = Math.round(Math.random() * 255);
+  const red3 = Math.round(Math.random() * 255);
+  const green3 = Math.round(Math.random() * 255);
+  const blue3 = Math.round(Math.random() * 255);
+  const red4 = Math.round(Math.random() * 255);
+  const green4 = Math.round(Math.random() * 255);
+  const blue4 = Math.round(Math.random() * 255);
+  const colorRandom2 = `rgb(${red2}, ${green2}, ${blue2})`;
+  const colorRandom3 = `rgb(${red3}, ${green3}, ${blue3})`;
+  const colorRandom4 = `rgb(${red4}, ${green4}, ${blue4})`;
   const c2 = document.getElementById('color2');
   const c3 = document.getElementById('color3');
   const c4 = document.getElementById('color4');
+  c2.style.backgroundColor = colorRandom2;
+  c3.style.backgroundColor = colorRandom3;
+  c4.style.backgroundColor = colorRandom4;
 
-  c2.style.backgroundColor = Math.random('#');
+  // let test = Math.floor(Math.random() * 10000)
+  // let testt = (`# ${test}`)
 }
 // Setando primeiro elemento como selected
 
@@ -40,7 +56,7 @@ function paintPixel() {
     pixel[i].addEventListener('click', (event) => {
       const colorS = document.querySelector('.selected');
       const bgColor = getComputedStyle(colorS, null).getPropertyValue(
-        'background-color',
+        'background-color'
       );
       event.target.style.backgroundColor = bgColor;
     });
@@ -62,7 +78,6 @@ function colorSel() {
 // Req 9 limpar quadro
 
 btnLimpar = document.getElementById('clear-board');
-
 btnLimpar.addEventListener('click', clearBoard);
 function clearBoard() {
   for (let i = 0; i < pixel.length; i += 1) {
@@ -76,18 +91,27 @@ const inputGenBoard = document.getElementById('board-size');
 const btnGenBoard = document.getElementById('generate-board');
 btnGenBoard.addEventListener('click', () => {
   const valueBoard = inputGenBoard.value;
-  // realValue = valueBoard % 5
   if (valueBoard.length === 0) {
     alert('Board inválido!');
-  } else pixelBoard.replaceChildren();
+  }
+  // if (valueBoard <= 4) {
+  //   genPixel(5);
+  // }
+  // if (valueBoard > 50) {
+  //   genPixel(50);
+  // }
+  // } else {
+  // realValue = valueBoard % 5
+  else pixelBoard.removeChild(pixel);
+  // pixel.style.backgroundColor = 'white';
   genPixel(valueBoard);
 });
-
 window.onload = function load() {
   genPixel(5);
   setColor1();
   colorSel();
   paintPixel();
+  colorGenerator();
 };
 
 // Req 7 selecionando cor na palheta

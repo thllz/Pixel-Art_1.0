@@ -112,6 +112,7 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: row-reverse;
+  max-width: 200px;
 }
 
 #clear-board {
@@ -119,7 +120,8 @@
   border-radius: 20px;
   color: white;
   background-color: red;
-  margin: auto;
+
+  /* margin: auto; */
 }
 
 #generate-board {
@@ -128,7 +130,8 @@
   border-radius: 20px;
   color: white;
   background-color: green;
-  margin-right: 10px;
+
+  /* margin-right: 10px; */
 }
 
 #board-size {
