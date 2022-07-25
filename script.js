@@ -1,4 +1,3 @@
-const selected = document.getElementsByClassName('selected');
 const pixelBoard = document.getElementById('pixel-board');
 const pixel = document.getElementsByClassName('pixel');
 const colorPalette = document.getElementsByClassName('color');
@@ -10,6 +9,7 @@ function genPixel(value) {
     const sLine = document.createElement('div');
     for (let c = 1; c <= value; c += 1) {
       const cLine = document.createElement('div');
+      cLine.classList.remove('pixel');
       cLine.classList.add('pixel');
       sLine.appendChild(cLine);
       cLine.style.backgroundColor = 'white';
@@ -17,6 +17,7 @@ function genPixel(value) {
     pixelBoard.appendChild(sLine);
   }
 }
+
 // Cores aleatórias
 
 function colorGenerator() {
@@ -38,13 +39,11 @@ function colorGenerator() {
   c2.style.backgroundColor = colorRandom2;
   c3.style.backgroundColor = colorRandom3;
   c4.style.backgroundColor = colorRandom4;
-
-  // let test = Math.floor(Math.random() * 10000)
-  // let testt = (`# ${test}`)
 }
+
 // Setando primeiro elemento como selected
 
-function setColor1(color) {
+function setColor1() {
   const color1 = document.querySelector('#color1');
   color1.classList.add('selected');
 }
@@ -60,6 +59,15 @@ function paintPixel() {
       );
       event.target.style.backgroundColor = bgColor;
     });
+  }
+}
+
+//Excluindo todos os pixels
+
+function removePixels() {
+  // pixell = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixelBoard.children.length;) {
+    pixelBoard.removeChild(pixelBoard.lastChild);
   }
 }
 
@@ -89,44 +97,39 @@ function clearBoard() {
 
 const inputGenBoard = document.getElementById('board-size');
 const btnGenBoard = document.getElementById('generate-board');
-btnGenBoard.addEventListener('click', () => {
-  const valueBoard = inputGenBoard.value;
-  if (valueBoard.length === 0) {
-    alert('Board inválido!');
+function inputPixel() {
+  btnGenBoard.addEventListener('click', () => {
+    const valueBoard = inputGenBoard.value;
+    value = valueBoard;
+    removePixels();
+    genPixel(value);
+    paintPixel();
+
+    if (valueBoard === '0' || valueBoard === '') {
+      alert('Board inválido!');
+    }
+  });
+}
+
+// Setando limite no input
+
+inputGenBoard.addEventListener('focusout', () => {
+  if (inputGenBoard.value < 5) {
+    inputGenBoard.value = 5;
+    alert('Tamanho mínimo = "5"');
   }
-  // if (valueBoard <= 4) {
-  //   genPixel(5);
-  // }
-  // if (valueBoard > 50) {
-  //   genPixel(50);
-  // }
-  // } else {
-  // realValue = valueBoard % 5
-  else pixelBoard.removeChild(pixel);
-  // pixel.style.backgroundColor = 'white';
-  genPixel(valueBoard);
+  if (inputGenBoard.value > 50) {
+    alert('Tamanho máximo = "50"');
+    inputGenBoard.value = 50;
+  }
 });
+
+// Loaders
 window.onload = function load() {
   genPixel(5);
   setColor1();
   colorSel();
+  inputPixel();
   paintPixel();
   colorGenerator();
 };
-
-// Req 7 selecionando cor na palheta
-// const c1 = document.getElementById('color1');
-// const c2 = document.getElementById('color2');
-// const c3 = document.getElementById('color3');
-// const c4 = document.getElementById('color4');
-
-// function colorSelected(event) {
-//   const selectedColor = document.querySelector('.selected');
-//   selectedColor.classList.remove('selected');
-//   event.target.classList.add('selected');
-// }
-
-// c1.addEventListener('click', colorSelected);
-// c2.addEventListener('click', colorSelected);
-// c3.addEventListener('click', colorSelected);
-// c4.addEventListener('click', colorSelected);
