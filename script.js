@@ -52,17 +52,17 @@ function setColor1() {
 
 function paintPixel() {
   for (let i = 0; i < pixel.length; i += 1) {
-    pixel[i].addEventListener('click', (event) => {
+    pixel[i].addEventListener('click', (e) => {
       const colorS = document.querySelector('.selected');
       const bgColor = getComputedStyle(colorS, null).getPropertyValue(
-        'background-color'
+        'background-color',
       );
-      event.target.style.backgroundColor = bgColor;
+      e.target.style.backgroundColor = bgColor;
     });
   }
 }
 
-//Excluindo todos os pixels
+// Excluindo todos os pixels
 
 function removePixels() {
   // pixell = document.getElementsByClassName('pixel');
@@ -85,13 +85,12 @@ function colorSel() {
 
 // Req 9 limpar quadro
 
-btnLimpar = document.getElementById('clear-board');
-btnLimpar.addEventListener('click', clearBoard);
-function clearBoard() {
+const btnLimpar = document.getElementById('clear-board');
+btnLimpar.addEventListener('click', () => {
   for (let i = 0; i < pixel.length; i += 1) {
     pixel[i].style.backgroundColor = 'white';
   }
-}
+});
 
 // Req 10 gerar pixels
 
@@ -100,7 +99,7 @@ const btnGenBoard = document.getElementById('generate-board');
 function inputPixel() {
   btnGenBoard.addEventListener('click', () => {
     const valueBoard = inputGenBoard.value;
-    value = valueBoard;
+    const value = valueBoard;
     removePixels();
     genPixel(value);
     paintPixel();
